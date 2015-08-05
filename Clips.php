@@ -28,7 +28,7 @@ class Clips{
 
 		if(getenv('CURL_CA_BUNDLE')) {
 			curl_setopt($ch, CURLOPT_CAINFO, getenv('CURL_CA_BUNDLE'));
-	  }
+		}
 
 		$result = curl_exec($ch);
 
