@@ -32,12 +32,12 @@ class Clips{
 
 		$result = curl_exec($ch);
 
-		if(curl_errno($ch)) {
-			$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-			$err = 'Error in request: status code ' . curl_getinfo($ch, CURLINFO_HTTP_CODE) . '. cURL message was ' . curl_error($ch);
+		if(curl_errno($ch) || ($status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) != 200) {
+			$err = 'Error in request: status code ' . $status_code . '. cURL message was ' . curl_error($ch);
 			curl_close($ch);
 			throw new Exception($err);
 		}
+
 	 	if(curl_getinfo($ch, CURLINFO_CONTENT_TYPE) === 'application/json') {
 			$result = json_decode($result, true);
 		}
