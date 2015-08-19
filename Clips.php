@@ -32,7 +32,7 @@ class Clips{
 
 		$result = curl_exec($ch);
 
-		if(curl_errno($ch) || ($status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) != 200) {
+		if( ($status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE)) != 200 || curl_errno($ch) ) {
 			$err = 'Error in request: status code ' . $status_code . '. cURL message was ' . curl_error($ch);
 			curl_close($ch);
 			throw new Exception($err);
